@@ -30,13 +30,15 @@ body:has(.welcome-page){background:#f8f5ea}
 .certificate-score{font-size:59px;font-weight:850;color:#833d59;letter-spacing:-.06em;margin:7px 0 0}
 .certificate-score span{font-size:25px;margin-left:2px;letter-spacing:0}
 .certificate-count{font-size:12px;color:#a37987;margin:4px 0 20px}
-.certificate-rank{display:inline-block;max-width:100%;background:#f9e6ed;color:#963f60;font-size:20px;font-weight:850;border-radius:99px;padding:9px 19px;overflow-wrap:anywhere}
+.certificate-rank{margin-top:18px;display:inline-block;max-width:100%;background:#f9e6ed;color:#963f60;font-size:20px;font-weight:850;border-radius:99px;padding:9px 19px;overflow-wrap:anywhere}
 .certificate-line{font-weight:750;color:#7f4b5f;font-size:15px;margin:18px 0 6px;overflow-wrap:anywhere}
 .certificate-sub{color:#956c7b;font-size:13px;margin:4px 0 19px;overflow-wrap:anywhere}
 .certificate-closing{color:#835c6a;font-size:14px;line-height:1.8;font-weight:600;margin:0}
 .certificate-meta{display:flex;justify-content:space-between;gap:5px;color:#9d7080;font-size:11px;margin-top:22px}
 .score-breakdown{display:flex;gap:8px;justify-content:space-between;align-items:center;padding:9px 7px;border-bottom:1px solid #f4e4e9;text-align:left;font-size:12px;color:#83566a}.score-breakdown strong{white-space:nowrap;color:#713b52}.certificate-sign{color:#9e667a;font-weight:700;font-size:13px;margin:15px 0 0}
 .quiz-photo{height:auto;min-height:0;width:100%;max-width:310px;margin:14px auto 18px;padding:6px;display:flex;justify-content:center;align-items:center;overflow:hidden}.quiz-photo img{display:block;width:auto;max-width:100%;height:auto;max-height:300px;object-fit:contain;border-radius:10px}@media(max-width:380px){.quiz-photo{max-width:270px}.quiz-photo img{max-height:260px}} .memory-choices{display:grid;gap:12px;margin-top:14px}.memory-choice{display:flex;gap:11px;align-items:center;font-size:14px;background:#fff8fa;border:1px solid #f0d8e1;border-radius:12px;padding:13px;cursor:pointer}.memory-choice input{accent-color:#a95675;width:17px;height:17px;flex-shrink:0}
+/* v25 certificate breakdown and ranking-button spacing */
+.ranking-submit-space{height:18px}
 /* v24 mobile typography and spacing */
 .app{word-break:keep-all;overflow-wrap:break-word}
 .app h1,.app h2,.app p,.app button,.app .muted{word-break:keep-all;overflow-wrap:break-word}
@@ -64,10 +66,10 @@ window.maheunLocal=()=>({name:state.name,score:score(),completed:state.quizSubmi
 
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function persist(){try{localStorage.setItem(K,JSON.stringify({name:state.name,quizAnswers:state.quizAnswers,photoAnswers:state.photoAnswers,letter:state.letter,prompt:state.prompt,word:state.word,quizSubmitted:state.quizSubmitted,photosSubmitted:state.photosSubmitted}))}catch{}}
-function correctCount(){return questions.filter((q,i)=>state.quizAnswers[i]===q[2]).length}function quizScore(){return correctCount()*70/questions.length}function photoScore(){return photos.filter((q,i)=>state.photoAnswers[i]===q.answer).length*(30/photos.length)}function score(){return Math.round((state.quizSubmitted?quizScore():0)+(state.photosSubmitted?photoScore():0))}function degree(count){return count>=90?['👑','또 다른 나','뭐야 무서워... 왜 다 맞춰?','저 대신 저로 살아주세요']:count>=75?['💎','공식 최측근','고맙습니다 이렇까지 잘 맞춰줘서','늘 지금처럼 함께해주세요']:count>=60?['💖','찐친 유망주','찍은건 아니겠죠?','앞으로가 기대됩니다']:count>=35?['🌱','지인','저에 대해 관심 좀 주세요','아직 시간은 많습니다']:['🐣','누구세요?','불혹파티에 왜 오신거죠?','안녕하세요! 저는 성은주라고 합니다 ^^']}
+function correctCount(){return questions.filter((q,i)=>state.quizAnswers[i]===q[2]).length}function quizScore(){return correctCount()*70/questions.length}function photoCorrectCount(){return photos.filter((q,i)=>state.photoAnswers[i]===q.answer).length}function photoScore(){return photoCorrectCount()*(30/photos.length)}function score(){return Math.round((state.quizSubmitted?quizScore():0)+(state.photosSubmitted?photoScore():0))}function degree(count){return count>=90?['👑','또 다른 나','뭐야 무서워... 왜 다 맞춰?','저 대신 저로 살아주세요']:count>=75?['💎','공식 최측근','고맙습니다 이렇까지 잘 맞춰줘서','늘 지금처럼 함께해주세요']:count>=60?['💖','찐친 유망주','찍은건 아니겠죠?','앞으로가 기대됩니다']:count>=35?['🌱','지인','저에 대해 관심 좀 주세요','아직 시간은 많습니다']:['🐣','누구세요?','불혹파티에 왜 오신거죠?','안녕하세요! 저는 성은주라고 합니다 ^^']}
 function certificate(){if(!state.quizSubmitted||!state.photosSubmitted)return `<div class="card center"><h2>💌 우정 인증서</h2><p class="muted">성은주 능력시험을 완료하면<br>내 점수에 맞는 인증서가 나와!</p>${button('능력시험 풀러 가기','quiz')}</div>`;const [emoji,title,line,sub]=degree(score());return `<div class="friendship-wrap"><div class="friendship-card"><div class="certificate-eyebrow">♡ &nbsp; CERTIFICATE OF FRIENDSHIP &nbsp; ♡</div><p class="certificate-kicker">제1회 성은주 능력시험</p><h2 class="certificate-title">우정 인증서</h2><div class="certificate-rule"></div><div class="certificate-emoji">${emoji}</div><div class="certificate-score">${score()}<span>점</span></div><p class="certificate-count">두 게임 합산 · 100점 만점</p>
 <div class="score-breakdown"><span>🏆 능력시험 (${correctCount()}/11 정답)</span><strong>${quizScore().toFixed(1)} / 70점</strong></div>
-<div class="score-breakdown"><span>📸 사진 퀴즈</span><strong>${photoScore().toFixed(1)} / 30점</strong></div><div class="certificate-rank">${title}</div><p class="certificate-line">${line}</p><p class="certificate-sub">${sub}</p><div class="certificate-rule"></div><p class="certificate-closing">정답은 달라도,<br>내 인생에 함께해 준 너는 언제나 정답이야. 💗</p><div class="certificate-meta"><span>수상자: ${esc(state.name)}</span><span>2027.06.13</span></div><p class="certificate-sign">성은주 (인) 💗</p></div></div>`}
+<div class="score-breakdown"><span>📸 사진 퀴즈 (${photoCorrectCount()}/${photos.length} 정답)</span><strong>${photoScore().toFixed(1)} / 30점</strong></div><div class="certificate-rank">${title}</div><p class="certificate-line">${line}</p><p class="certificate-sub">${sub}</p><div class="certificate-rule"></div><p class="certificate-closing">정답은 달라도,<br>내 인생에 함께해 준 너는 언제나 정답이야. 💗</p><div class="certificate-meta"><span>수상자: ${esc(state.name)}</span><span>2027.06.13</span></div><p class="certificate-sign">성은주 (인) 💗</p></div></div>`}
 
 function button(label,click,cls=''){return `<button class="btn ${cls}" data-do="${click}">${label}</button>`}
 function render(){
@@ -83,7 +85,7 @@ if(state.page==='ranking'){s=(!state.quizSubmitted||!state.photosSubmitted)?
 <p class="tiny muted">${cloud.scoresError?esc(cloud.scoresError):'참가자가 제출한 기록을 실시간으로 보여줘요.'}</p>
 ${[0,1,2,3,4].map((i)=>{const r=cloud.scores[i];const emoji=['🥇','🥈','🥉','🏅','🏅'][i];return `<div class="ranking" style="gap:8px"><span style="white-space:nowrap">${emoji} ${i+1}위</span><span style="text-align:right;min-width:0">${r?`<strong>${esc(r.name)} · ${Number(r.score)||0}점</strong><br><span class="tiny muted">${esc(degree(Number(r.score)||0)[0]+' '+degree(Number(r.score)||0)[1])}</span>`:'아직 참가자 없음'}</span></div>`}).join('')}
 <div class="ranking"><span>📍 내 순위</span><strong>${cloud.scores.findIndex(x=>x.id===cloud.uid)>=0?(cloud.scores.findIndex(x=>x.id===cloud.uid)+1)+'위':'미제출'}</strong></div>
-${button('내 점수 전체 랭킹에 등록하기','publishScore','secondary')}
+<div class="ranking-submit-space"></div>${button('내 점수 전체 랭킹에 등록하기','publishScore','secondary')}
 <p class="tiny muted">${esc(cloud.saveStatus||'등록하면 점수가 공유되고 같은 익명 계정으로 중복 제출할 수 없어요.')}</p></div>
 ${button('📝 능력시험 정답 다시 보기','reviewQuiz','outline')}<div class="space"></div>${button('📸 사진 퀴즈 정답 다시 보기','reviewPhotos','outline')}<div class="space"></div>${button('기억 한 줄 남기기 💌','memory')}`;}
 
