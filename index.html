@@ -103,6 +103,117 @@ body:has(.welcome-page){background:#f8f5ea}
 .nav button{flex:1 1 0;min-width:0;padding:6px 1px;font-size:10px;line-height:1.28;white-space:nowrap}
 .nav span{font-size:19px;line-height:1.15;margin-bottom:5px}
 @media(max-width:360px){.nav button{font-size:9px}.nav span{font-size:18px}}
+
+/* v31: Mobile-first visual consistency. No scoring, Firebase, quiz, or timeline logic changed. */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{overflow-x:hidden}
+.app{width:100%;min-width:0;padding-bottom:calc(116px + env(safe-area-inset-bottom,0px));overflow-x:clip}
+#root{min-width:0}
+#root > .eyebrow{font-size:clamp(10px,2.8vw,11px);letter-spacing:.14em;line-height:1.6;margin:4px 0 15px}
+.app h1,.app h2,.app h3{line-height:1.34;word-break:keep-all;overflow-wrap:break-word;text-wrap:pretty}
+.app h1{font-size:clamp(26px,7.7vw,34px);letter-spacing:-.055em;margin:10px 0 16px}
+.app h2{font-size:clamp(21px,6vw,25px);letter-spacing:-.045em;margin:9px 0 16px}
+.app h3{font-size:clamp(16px,4.7vw,19px);line-height:1.43;margin:6px 0 14px}
+.app p{line-height:1.73;text-wrap:pretty;word-break:keep-all;overflow-wrap:break-word}
+.app .muted,.app .tiny{line-height:1.65}
+.app .card{max-width:100%;padding:clamp(15px,4.3vw,19px);margin:15px 0;border-radius:20px}
+.app .hero{padding:clamp(19px,5vw,26px) clamp(14px,4.2vw,19px);border-radius:24px}
+.app .hero h2{margin:13px 0 9px}
+.app .hero p{margin:9px 0}
+.app .btn{display:flex;align-items:center;justify-content:center;width:100%;min-width:0;min-height:52px;padding:13px 14px;font-size:clamp(13px,3.8vw,15px);line-height:1.42;white-space:normal;word-break:keep-all;overflow-wrap:break-word;text-wrap:balance}
+.app .btnrow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:stretch;margin:15px 0}
+.app .btnrow>.btn{height:100%;margin:0!important;padding:12px 8px}
+.app .btnrow>.btn+.btn{margin-top:0!important}
+.app .btn+.btn{margin-top:15px}
+.app .btnrow+.btn{margin-top:16px}
+.app .card>.btn+.btn{margin-top:15px}
+.app .option{font-size:clamp(14px,3.9vw,16px);line-height:1.45;min-height:51px;padding:14px 15px;margin:10px 0;word-break:keep-all;overflow-wrap:break-word}
+.app .option.selected{padding:13px 14px}
+.app .field{font-size:16px;line-height:1.4;min-width:0;min-height:52px;padding:13px 14px}
+.app textarea.field{line-height:1.7;min-height:150px;resize:vertical}
+.app .progress{margin:15px 0 20px}
+.app .menu{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:20px 0 16px}
+.app .menu button{min-width:0;min-height:122px;padding:16px 10px;border-radius:17px;overflow-wrap:break-word;word-break:keep-all}
+.app .menu .emoji{font-size:28px;line-height:1.2;margin-bottom:9px}
+.app .menu strong{font-size:clamp(13px,3.6vw,15px);line-height:1.38}
+.app .menu small{font-size:11px;line-height:1.45;margin-top:7px;word-break:keep-all}
+.app .nav{width:min(460px,100%);min-height:71px;padding:8px max(3px,env(safe-area-inset-right,0px)) calc(8px + env(safe-area-inset-bottom,0px)) max(3px,env(safe-area-inset-left,0px));display:grid;grid-template-columns:repeat(6,minmax(0,1fr));align-items:stretch;z-index:12;box-shadow:0 -3px 15px #b56f8410}
+.app .nav button{min-width:0;width:100%;min-height:55px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:4px 0;font-size:clamp(9px,2.5vw,11px);line-height:1.2;white-space:nowrap;letter-spacing:-.045em}
+.app .nav span{font-size:clamp(18px,5vw,21px);line-height:1.12;margin:0}
+.app .prize-banner{padding:15px 14px;margin:17px 0}
+.app .prize-line{flex-wrap:wrap;gap:2px 10px;line-height:1.55;margin:9px 0}
+.app .prize-line span{min-width:0;flex:1 1 165px;word-break:keep-all}
+.app .prize-line b{flex:0 0 auto;margin-left:auto}
+.app .prize-note{line-height:1.65}
+/* Welcome: preserve the accepted illustration, no cropping or stretching. */
+.app:has(.welcome-page){padding:0 0 calc(100px + env(safe-area-inset-bottom,0px));overflow-x:clip}
+.welcome-page{width:100%}
+.welcome-art{display:block;width:100%;height:auto;aspect-ratio:auto;object-fit:contain;max-height:none}
+.welcome-entry{margin:-8px 16px 0;padding:21px 18px 20px;min-width:0}
+.welcome-title{font-size:clamp(21px,5.9vw,25px);line-height:1.4;letter-spacing:-.055em}
+.welcome-sub{line-height:1.7}
+.welcome-label{line-height:1.45;word-break:keep-all}
+.welcome-year-help,.map-public-note{line-height:1.65;word-break:keep-all;overflow-wrap:break-word}
+.welcome-features{line-height:1.8;word-break:keep-all;overflow-wrap:break-word}
+/* Photo quiz: keep all nine photographs and aspect ratios intact. */
+.quiz-photo{width:100%;max-width:min(310px,100%);height:auto;min-height:0;margin:14px auto 18px;padding:6px;overflow:hidden}
+.quiz-photo img{display:block;width:auto;height:auto;max-width:100%;max-height:min(300px,42dvh);object-fit:contain}
+/* Results and certificate: readable score breakdown on narrow phones. */
+.friendship-wrap{max-width:100%;padding:10px;margin:16px 0 20px}
+.friendship-card{padding:clamp(15px,4.2vw,23px) clamp(11px,3.8vw,17px) 20px}
+.certificate-title{font-size:clamp(23px,6.5vw,27px);line-height:1.35}
+.certificate-score{font-size:clamp(51px,14.6vw,59px)}
+.certificate-count{line-height:1.55}
+.score-breakdown{display:flex;flex-wrap:wrap;align-items:baseline;gap:5px 8px;min-width:0;padding:12px 5px;font-size:clamp(11px,3vw,12px);line-height:1.5}
+.score-breakdown span{flex:1 1 145px;min-width:0;word-break:keep-all}
+.score-breakdown strong{white-space:nowrap;flex:0 0 auto;margin-left:auto}
+.certificate-rank{margin-top:22px;font-size:clamp(17px,5vw,20px)}
+.certificate-meta{flex-wrap:wrap;gap:7px;line-height:1.45}
+.ranking{gap:10px;min-width:0;align-items:center;padding:13px 0;line-height:1.55}
+.ranking>*{min-width:0;overflow-wrap:break-word;word-break:keep-all}
+.ranking strong{font-size:clamp(12px,3.5vw,14px)}
+.ranking-submit-space{height:20px}
+/* Memory and letter: readable paragraphs without broken syllables. */
+.memory-choices{gap:12px}
+.memory-choice{min-height:54px;font-size:clamp(13px,3.7vw,15px);line-height:1.5;padding:12px 13px}
+.app .letter{font-size:clamp(14px,3.6vw,15px);line-height:1.88;word-break:keep-all;overflow-wrap:break-word;white-space:normal;padding:clamp(17px,5vw,23px)}
+.app .letter p{font-size:inherit;line-height:1.88;margin:0 0 19px;text-align:left}
+.app .letter p:last-child{text-align:right}
+.app .thanks-heading{font-size:clamp(20px,5.6vw,26px);line-height:1.45;margin:12px 0 21px;text-align:center}
+.app .thanks-heading .heading-emoji{font-size:.84em;display:inline-block}
+/* Timeline: long dates/names fit narrow phone widths without horizontal overflow. */
+.life-intro{line-height:1.8}
+.life-timeline{margin:20px 0 12px 13px;padding-left:24px}
+.life-entry{min-width:0;margin-bottom:15px;padding:15px 14px;overflow-wrap:break-word}
+.life-event-title{line-height:1.58}
+.life-people-tags{min-width:0}
+.map-friend{max-width:100%;overflow-wrap:break-word}
+/* Prevent overflow in narrow layouts and with enlarged system fonts. */
+@media(max-width:380px){
+ .app{padding-left:14px;padding-right:14px}
+ .app h1{font-size:clamp(25px,7.8vw,29px)}
+ .app h2{font-size:clamp(20px,6.1vw,23px)}
+ .app .card{padding:15px 13px}
+ .app .hero{padding:19px 14px}
+ .app .btnrow{gap:9px}
+ .app .btnrow>.btn{font-size:13px;padding:12px 6px}
+ .app .nav button{font-size:9px}
+ .app .nav span{font-size:18px}
+ .welcome-entry{margin:-7px 12px 0;padding:20px 14px}
+ .app .menu{gap:10px}
+ .app .menu button{padding:15px 7px;min-height:118px}
+ .quiz-photo{max-width:min(280px,100%)}
+ .quiz-photo img{max-height:min(270px,40dvh)}
+ .friendship-wrap{padding:8px}
+ .friendship-card{padding:17px 11px}
+ .certificate-eyebrow{font-size:9px;letter-spacing:.07em}
+ .life-timeline{margin-left:9px;padding-left:21px}
+ .life-entry{padding:13px 12px}
+}
+@media(min-width:381px) and (max-width:430px){.app{padding-left:18px;padding-right:18px}}
+@media(min-width:431px){.app{padding-left:21px;padding-right:21px}}
+@media(prefers-reduced-motion:reduce){.progress>div,.shake{animation:none;transition:none}}
+
 </style></head><body><div class="app"><main id="root"></main><nav class="nav" id="nav"></nav></div><script>
 (function(){
 const questions=[["성은주가 다음 중 가장 좋아하는 풍경은?",["산","바다","도시","사막"],0],["성은주가 가장 좋아하는 계절은?",["봄","여름","가을","겨울"],1],["성은주가 가장 최근에 다녀온 해외 여행지는?",["스위스","이탈리아","스페인","크로아티아"],1],["성은주가 골프보다 더 좋아하는 것은?",["아이쇼핑","맛있는 음식","잠자기","드라이브"],1],["성은주가 가장 좋아하는 맛은?",["짠맛","신맛","단맛","매운맛"],2],["성은주가 입사 10주년이 되는 해는?",["2024","2025","2026","2027"],1],["성은주가 가장 선호하는 음식 종류는?",["한식","양식","중식","멕시칸"],0],["성은주의 친언니 이름은?",["성은정","성은영","성은지","성은진"],0],["성은주의 MBTI는?",["ENFP","ISFJ","ISFP","ESFP"],2],["성은주의 퍼스널컬러는?",["봄 웜 라이트","여름 쿨 라이트","여름 쿨 뮤트","겨울 쿨 브라이트"],1],["성은주가 현재 소유한 주얼리 중 가장 비싼 제품은?",["까르띠에 앵끌루 팔찌","부쉐론 콰트로 목걸이","쇼메 비 드 쇼메 반지","반클리프 빈티지 다이아 목걸이"],3]];
@@ -172,7 +283,7 @@ if(state.page==='connections'){
   s=`${header}<h2>🌸 성은주의 40년, 그리고 우리</h2><p class="life-intro">성은주의 인생 연혁에 우리가 처음 만난 해를 함께 남겨요.<br>사진보다 오래 남을 우리들의 인연 타임라인 💗</p><div class="map-center">🌸 성은주<small>1988 — 2027 · 그리고 함께한 사람들</small></div><p class="map-stat">인연지도에 표시된 친구 ${rows.length}명 · ${years.length}개 연도</p>${cloud.connectionsError?`<p class="tiny muted">${esc(cloud.connectionsError)}</p>`:''}<div class="life-timeline">${entries.map(card).join('')}${unknownCard}</div>${!rows.length?'<div class="card center"><p class="muted">아직 공개된 친구가 없어요.<br>첫 번째 인연이 되어주세요! 💗</p></div>':''}<div class="card"><p class="tiny muted">연혁은 성은주가 등록한 내용이에요. 참여할 때 안내한 이름(또는 별명)과 처음 알게 된 연도를 표시해요. 이전에 비공개로 제출된 기록은 다시 저장하기 전까지 공개되지 않아요.</p>${button('내 이름·인연 연도 변경하기','welcome','outline')}</div>${button('처음 화면으로','home','secondary')}`;
 }
 if(state.page==='thanks')s=`${header}<h2 class="thanks-heading">마흔이 된 성은주가 전하는 편지 <span class="heading-emoji">💌</span></h2><div class="letter"><div class="heart center">💗</div><p>2026년은 제 인생에서 잊지 못할 한 해였습니다.</p><p>당연하게 여겼던 평범한 일상이 얼마나 소중한지, 그리고 제 곁에 얼마나 많은 좋은 사람들이 있는지 깨닫게 되었습니다.</p><p>걱정해 주시고, 응원해 주시고, 따뜻한 마음으로 곁을 지켜주신 모든 분께 진심으로 감사드립니다.</p><p>돌아보니 저는 참 복이 많은 사람이었습니다.</p><p>앞으로는 행복을 미루지 않고, 하고 싶은 일도 마음껏 해보고, 사랑하는 사람들과 더 많은 추억을 만들며 살아가겠습니다.</p><p>저도 여러분께 행복과 웃음을 전하는 사람이 되겠습니다.</p><p><strong>제 인생의 한 페이지를 함께해 주셔서 감사합니다. 앞으로도 우리 오래오래 함께해요! 💗</strong></p><p>2027년 6월 13일<br>성은주 드림</p></div><div class="space"></div>${button('처음 화면으로','home','secondary')}`;
-s+=`<p class="foot">초대받은 분들만 참여해 주세요.</p>`;root.innerHTML=s;
+s+=`<p class="foot">초대받은 분들만 참여해 주세요.</p>`;root.dataset.screen=state.page;root.innerHTML=s;
 const sections=[['home','🏠','홈'],['quiz','🏆','능력시험'],['photos','📸','사진'],['ranking','💗','결과'],['memory','💌','기억'],['connections','💞','인연확인']];nav.innerHTML=state.page==='welcome'?'':sections.map(x=>`<button class="${x[0]===state.page?'active':''}" data-do="${x[0]}"><span>${x[1]}</span>${x[2]}</button>`).join('');
 }
 function go(p){state.page=p;window.scrollTo({top:0});render()}
