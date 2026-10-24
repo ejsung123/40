@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="referrer" content="no-referrer">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#fff6f3">
+  <title>드디어 불혹파티!</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;background:#f7e8e9;color:#71384a;font-family:system-ui,"Apple SD Gothic Neo","Malgun Gothic",sans-serif}
+    main{max-width:480px;min-height:100dvh;margin:auto;display:flex;align-items:center;justify-content:center;padding:24px;background:linear-gradient(160deg,#fffaf7,#fff0f1);text-align:center}
+    .card{width:100%;border:1px solid #eabac5;border-radius:28px;padding:37px 24px;background:#fffdfaf0;box-shadow:0 12px 44px #92244e15}
+    .cake{font-size:42px;margin:0 0 15px}.title{font-size:28px;letter-spacing:-.05em;margin:0 0 14px;color:#a5254b}.msg{font-size:14px;line-height:1.9;color:#86626b;white-space:pre-line;margin:0 0 22px}
+    .btn{display:block;width:100%;padding:15px 12px;border-radius:999px;background:#ab2851;color:#fff;font-weight:800;text-decoration:none;border:0;font-size:14px}.btn.secondary{margin-top:10px;background:white;color:#a5254b;border:1px solid #dfa3b2}
+    .small{font-size:12px;color:#a27a84;line-height:1.8;margin:20px 0 0}
+  </style>
+  <script src="settings.js"></script>
+</head>
+<body>
+<main><section class="card" aria-live="polite">
+  <div class="cake" aria-hidden="true">🎂</div>
+  <h1 class="title">드디어 불혹파티!</h1>
+  <p class="msg" id="message">초대장을 여는 중이에요.</p>
+  <a class="btn" href="#" id="openLink" hidden>초대장 열기</a>
+  <a class="btn secondary" href="preview.html" id="previewLink" hidden>공용 초대장 미리보기</a>
+  <p class="small" id="help">잠시 후 초대장으로 연결됩니다.</p>
+</section></main>
+<script>
+(function(){
+  'use strict';
+  var qs=new URLSearchParams(window.location.hash.slice(1));
+  var token=qs.get('t') || new URLSearchParams(location.search).get('t') || '';
+  var app=(window.FORTY_APPS_SCRIPT_URL||'').trim();
+  var msg=document.getElementById('message');
+  var help=document.getElementById('help');
+  var link=document.getElementById('openLink');
+  var preview=document.getElementById('previewLink');
+  if(!token){msg.textContent='이 페이지는 개인별 초대 링크로 이용할 수 있어요.';help.textContent='초대장 제작자는 아래 미리보기에서 디자인을 확인할 수 있어요.';preview.hidden=false;return;}
+  if(!/^[0-9a-f]{32}$/i.test(token)){msg.textContent='초대 링크가 올바르지 않아요. 초대장을 보내준 사람에게 새 링크를 요청해 주세요.';help.textContent='';return;}
+  if(!/^https:\/\/script\.google\.com\/macros\/s\/[\w-]+\/exec\/?$/.test(app)){
+    msg.textContent='초대장은 준비 중이에요. 아직 회신 연결이 완료되지 않았어요.';
+    help.textContent='초대한 사람에게 문의해 주세요.';return;
+  }
+  var target=app.replace(/\/$/,'')+'?t='+encodeURIComponent(token);
+  link.href=target;link.hidden=false;
+  msg.textContent='나만의 초대장을 불러오고 있어요.';
+  help.textContent='자동으로 열리지 않으면 위 버튼을 눌러 주세요.';
+  // 바로 Apps Script 웹앱으로 이동: iframe·CORS·브라우저 쿠키 제한 회피
+  window.location.replace(target);
+})();
+</script>
+</body>
+</html>
